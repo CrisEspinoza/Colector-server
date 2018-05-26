@@ -8,10 +8,13 @@ import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import twitter4j.*;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 
 @Service
 @Configurable
@@ -36,7 +39,7 @@ public class TwitterListener {
                     tweet = new BasicDBObject("id", status.getId())
                             .append("text", status.getText())
                             .append("like", status.getFavoriteCount())
-                            .append("geoLocation", status.getGeoLocation())
+                            .append("geoLocation", status. 	getGeoLocation())
                             .append("retweet", status.getRetweetCount())
                             .append("locationUser", status.getUser().getLocation())
                             .append("name", status.getUser().getName())
@@ -74,42 +77,35 @@ public class TwitterListener {
 
             }
         });
+        //System.out.println("llegue aca ");
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Club[]> response =
+                restTemplate.getForEntity("http://159.65.128.52:8080/TBD-G7/club",Club[].class);
+        Club[] clubs=response.getBody();
+        //System.out.println(clubs[1]);
+        ArrayList<String> acumulador = new ArrayList<String>();
+        //System.out.println("llegue aca 1");
+        for (Club c: clubs) {
+           // System.out.println("llegue aca 1.5");
+            acumulador.add(c.getName());
+            System.out.println(c.getName());
+            for (Keyword k:c.getKeywords()) {
+                acumulador.add(k.getName_keyword());
+             //   System.out.println(k.getName_keyword());
 
+            }
+
+        }
+        //System.out.println("llegue aca 2");
+        String[] filtro = new String[acumulador.size()];
+        filtro= acumulador.toArray(filtro);
+//        for (String c: filtro
+//             ) {
+//            System.out.println(c);
+//
+//        }
         FilterQuery filter=new FilterQuery();
-        filter.track(new String[]{"Católica","La UC", "cruzados", "la franja", "Azul y Blanco","Caballeros Cruzados", "la Cato",
-                "El campanil", "u de conce"," la u penquista", "auricielos"," los del foro","Foreros",
-                "La U", "la Chile", "el bulla"," el león", "chuncho", "azul", "leon", "bullanguero"," romántico viajero", "azules",
-
-                "Colo Colo",
-                "Cacique", "Indio", "colocolino", "albo", "garrero", "el popular", "eterno campeón","la ruca","cacike",
-
-                "Unión la Calera",
-                "Cementeros", "maquina cementera", "la calera",
-
-                "Antofagasta",
-                "Pumas", "albiceleste",
-                "Unión española",
-                "Hispanos", "furia roja", "rojos de Santa Laura",
-                "O’higgins",
-                "Minero", "celeste", "capo de provincia", "rancagüinos",
-                "Huachipato",
-                "Acerero", "siderúrgicos",
-                "Iquique",
-                "Dragón", "celeste",
-                "Palestino",
-                "Árabe"," paisano", "tricolore", "tino-tino",
-                "Curicó unido",
-                "Tortero", "albirrojo"," curi", "Cuadro Tortero",
-                "San luis",
-                "Canario", "amarillo",
-                "Audax italiano",
-                "Audino", "verde", "tano", "itálico",
-                "Everton",
-                "Evertoniano", "ruletero", "auriazul",
-                "Temuco",
-                "Albiverde", "león de ñielol", "el pije"," el histórico", "temucanos", "la cruz de malta"}
-
-        );
+        filter.track( filtro);
         filter.language(new String[]{"es"});
         twitterStream.filter(filter);
     }

@@ -31,7 +31,8 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     runtime("org.springframework.boot:spring-boot-starter-tomcat")
-
+    compile group: 'org.springframework', name: 'spring-web', version: '5.0.6.RELEASE'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
 
