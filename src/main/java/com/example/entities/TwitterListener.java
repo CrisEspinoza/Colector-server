@@ -19,8 +19,8 @@ import java.util.Arrays;
 public class TwitterListener {
     @Autowired
     private TwitterStream twitterStream;
-    @Autowired
-    private MongoTemplate mongo;
+//    @Autowired
+//    private MongoTemplate mongo;
 
     MongoCredential credential = MongoCredential.createCredential("TBDG7", "TBDG7", "Antihackers".toCharArray());
     MongoClient mongoClient = new MongoClient(new ServerAddress("159.65.198.230", 18117), Arrays.asList(credential));
@@ -122,12 +122,12 @@ public class TwitterListener {
         this.twitterStream = twitterStream;
     }
 
-    public MongoTemplate getMongo() {
-        return mongo;
-    }
-
-    public void setMongo(MongoTemplate mongo) {
-        this.mongo = mongo;
-    }
+//    public MongoTemplate getMongo() {
+//        return mongo;
+//    }
+//
+//    public void setMongo(MongoTemplate mongo) {
+//        this.mongo = mongo;
+//    }
 }
 

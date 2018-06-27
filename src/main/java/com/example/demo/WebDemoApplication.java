@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 
-@ComponentScan({"com.example.demo", "com.example.controllers"})
+@ComponentScan({"com.example.demo"})
 @EntityScan("com.example.entities")
 public class WebDemoApplication extends SpringBootServletInitializer{
 
