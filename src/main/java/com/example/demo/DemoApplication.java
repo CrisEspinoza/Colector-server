@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.entities.Probando;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

@@ -22,11 +22,11 @@ public class TwitterListener {
     @Autowired
     private MongoTemplate mongo;
 
-    MongoCredential credential = MongoCredential.createCredential("TBDG7", "TBDG7", "Antihakers".toCharArray());
-    MongoClient mongoClient = new MongoClient();
+    MongoCredential credential = MongoCredential.createCredential("TBDG7", "TBDG7", "Antihackers".toCharArray());
+    MongoClient mongoClient = new MongoClient(new ServerAddress("159.65.198.230", 18117), Arrays.asList(credential));
 
-    DB database = mongoClient.getDB("twitter7");
-    DBCollection collection = database.getCollection("futbol");
+    DB db = mongoClient.getDB("TBDG7");
+    DBCollection collection  = db.getCollection("futbol");
     @PostConstruct
     public void run() {
         twitterStream.addListener(new StatusListener() {
@@ -84,7 +84,7 @@ public class TwitterListener {
         //System.out.println("llegue aca ");
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Club[]> response =
-                restTemplate.getForEntity("http://159.65.128.52:8080/TBD-G7/club",Club[].class);
+                restTemplate.getForEntity("http://206.189.184.79:8091/TDBG7/club",Club[].class);
         Club[] clubs=response.getBody();
         //System.out.println(clubs[1]);
         ArrayList<String> acumulador = new ArrayList<String>();
