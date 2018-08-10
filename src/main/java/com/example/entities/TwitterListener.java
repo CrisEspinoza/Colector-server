@@ -25,7 +25,7 @@ public class TwitterListener {
     MongoCredential credential = MongoCredential.createCredential("TBDG7A", "TBDG7-A", "antihackers3.0".toCharArray());
     MongoClient mongoClient = new MongoClient(new ServerAddress("178.128.222.125", 18117), Arrays.asList(credential));
 
-    DB db = mongoClient.getDB("TBDG7");
+    DB db = mongoClient.getDB("TBDG7-A");
     DBCollection collection  = db.getCollection("futbol");
     @PostConstruct
     public void run() {
