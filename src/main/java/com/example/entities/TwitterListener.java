@@ -84,7 +84,7 @@ public class TwitterListener {
         //System.out.println("llegue aca ");
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Club[]> response =
-                restTemplate.getForEntity("http://206.189.184.79:8091/TDBG7/club",Club[].class);
+                restTemplate.getForEntity("http://178.128.72.52:8091/TDBG7/club",Club[].class);
         Club[] clubs=response.getBody();
         //System.out.println(clubs[1]);
         ArrayList<String> acumulador = new ArrayList<String>();
